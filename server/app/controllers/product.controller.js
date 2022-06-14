@@ -193,8 +193,12 @@ exports.count = async (req, res) => {
 };
 
 exports.productsDetail = async (req, res) => {
-  const result = await productsDetailFunc(
-    "https://www.mega.tn/telephonie_internet/telephonie_mobile/smartphone/samsung/smartphone-samsung-galaxy-a22-64go"
-  );
+  const url = req.query.url;
+
+  if (!url) {
+    return res.send("url is required");
+  }
+
+  const result = await productsDetailFunc(url);
   res.send(result);
 };

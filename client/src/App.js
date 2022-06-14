@@ -16,6 +16,8 @@ import Signup from "./views/Signup";
 
 import Products from "./views/Products";
 
+import ProductDetails from "./views/ProductDetails";
+
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 
 function ReactQueryWrapper({ children }) {
@@ -84,6 +86,12 @@ class App extends React.Component {
                 exact
                 path="/products"
                 component={Products}
+                layout={LayoutAlternative}
+              />
+              <AppRoute
+                exact
+                path="/product"
+                component={ProductDetails}
                 layout={LayoutAlternative}
               />
             </Switch>

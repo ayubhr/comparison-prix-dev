@@ -2,7 +2,7 @@ import React from "react";
 import HeroFull from "../components/sections/HeroFull02";
 import Testimonial from "../components/sections/Testimonial";
 import GenericSection from "../components/sections/GenericSection";
-
+import { Link } from "react-router-dom";
 import { api } from "../utils/client";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 
@@ -12,8 +12,6 @@ const Products = () => {
 		() => api.get("products"),
 		{ refetchOnMount: false }
 	);
-
-	console.log(data);
 
 	return (
 		<React.Fragment>
@@ -26,13 +24,16 @@ const Products = () => {
 									key={key}
 									className="lg:w-1/4 md:w-1/2 p-4 w-full"
 								>
-									<a className="block relative h-48 rounded overflow-hidden">
+									<Link
+										to={`product?link=${prod.link}`}
+										className="block relative h-48 rounded overflow-hidden"
+									>
 										<img
 											alt="ecommerce"
 											className="object-cover object-center w-full h-full block"
 											src={prod.image}
 										/>
-									</a>
+									</Link>
 									<div className="mt-4">
 										<h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
 											{prod.category}

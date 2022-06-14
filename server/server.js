@@ -6,22 +6,24 @@ const app = express();
 app.use(cors());
 
 // parse requests of content-type - application/json
-app.use(express.json());  /* bodyParser.json() is deprecated */
+app.use(express.json()); /* bodyParser.json() is deprecated */
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is deprecated */
+app.use(
+  express.urlencoded({ extended: true })
+); /* bodyParser.urlencoded() is deprecated */
 
 const db = require("./app/models");
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
   .then(() => {
     console.log("Connected to the database!");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
@@ -31,7 +33,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Price Comparison application." });
 });
 
-app.get("/productdetail", products.productsDetail);
+app.get("/api/productdetail", products.productsDetail);
 require("./app/routes/product.routes")(app);
 require("./app/routes/authRoute")(app);
 
